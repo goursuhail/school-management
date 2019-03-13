@@ -39,9 +39,23 @@ try{
 
   $search = '';
 
+  $per_page = 5;
+  $curr_page = 1;
+
    if(isset($_GET['search']) && $_GET['search'] != ''){
      $search = $_GET['search'];
    }
+
+   if(isset($_GET['page'])){
+     $curr_page = $_GET['page'];
+   }
+
+
+   $limit_start = ($curr_page - 1) * $per_page;
+
+   $limit = ' limit '.$limit_start.', '.$per_page;
+
+
 
   $query = 'SELECT * FROM `teacher`';
 
@@ -49,7 +63,24 @@ try{
     $query = $query." WHERE ".$_GET['search_field']." = '".$search."'";
   }
 
+//run query to get total data
   $stmt = $conn->query($query);
+
+  $total = $stmt->rowCount();
+
+  $pages = $total/$per_page;
+
+  if($total % $per_page > 0){
+    $pages++;
+  }
+
+  //run actual query
+
+  $stmt = $conn->query($query.' '.$limit);
+
+
+
+
 
       ?>
       <table class="table">
@@ -83,6 +114,27 @@ try{
   }
   ?>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+    <?php
+      for($i = 1; $i <= $pages; $i++){
+
+        $active = '';
+        if($i == $curr_page){
+        $active = 'active';
+      }
+    ?>
+
+    <li class="page-item <?php echo $active; ?>">
+      <a class="page-link" href="http://localhost/school-management/teach-display.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+    </li>
+    <?php
+        }
+    ?>
+
+  </ul>
+</nav>
 <?php
 
 }catch(PDOException $e){

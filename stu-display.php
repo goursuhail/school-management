@@ -42,9 +42,20 @@ try{
 
   $search = '';
 
+  $per_page = 5;
+  $curr_page = 1;
+
    if(isset($_GET['search']) && $_GET['search'] != ''){
      $search = $_GET['search'];
    }
+
+   if(isset($_GET['page'])){
+     $curr_page = $_GET['page'];
+   }
+
+   $limit_start = ($curr_page - 1) * $per_page;
+
+   $limit = ' limit '.$limit_start.', '.$per_page;
 
   $query = 'SELECT * FROM `student`';
 
@@ -54,7 +65,22 @@ try{
     $query = $query." WHERE ".$_GET['search_field']." = '".$search."'";
   }
 
+// run query to get total data
   $stmt = $conn->query($query);
+
+  $total = $stmt->rowCount();
+
+  $pages = $total/$per_page;
+
+  if($total % $per_page > 0){
+    $pages++;
+  }
+
+  // Run actual query
+  //echo $query.' '.$limit;
+
+   $stmt = $conn->query($query.' '.$limit)
+
   ?>
 
 
@@ -64,7 +90,7 @@ try{
     <th scope="col">S.Id</th>
     <th scope="col">S.Name</th>
     <th scope="col">F.Name</th>
-    <th scope="col">C.Id</th>
+    <th scope="col">Class Name</th>
     <th scope="col">Dob</th>
     <th scope="col">Address</th>
     <th scope="col">Phone</th>
@@ -81,7 +107,7 @@ while($row = $stmt->fetch()){
     <td><?php echo $row['s_id']; ?></td>
     <td><?php echo $row['name']; ?></td>
     <td><?php echo $row['fname']; ?></td>
-    <td><?php echo $row['c_id']; ?></td>
+    <td><?php echo $row['class_name']; ?></td>
     <td><?php echo $row['dob']; ?></td>
     <td><?php echo $row['address']; ?></td>
     <td><?php echo $row['phone']; ?></td>
@@ -95,6 +121,24 @@ while($row = $stmt->fetch()){
 ?>
 
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <?php
+      for($i = 1; $i <= $pages; $i++){
+
+        $active = '';
+        if($i == $curr_page){
+          $active = 'active';
+        }
+        ?>
+          <li class="page-item <?php echo $active; ?>">
+            <a class="page-link" href="http://localhost/school-management/stu-display.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+          </li>
+        <?php
+      }
+    ?>
+  </ul>
+</nav>
 <?php
 
 }catch(PDOException $e){
