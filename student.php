@@ -13,7 +13,7 @@
   <?php
 
 
-  $section = get_class1($conn);
+  $sections = get_class1($conn);
 
    ?>
 
@@ -56,7 +56,7 @@
   <div class="col-sm-3">
     <label for="exampleInputPassword1"><strong>Class id</strong></label>
     <select name="choose" class="form-control">
-      <?php foreach ($section as $id => $class){
+      <?php foreach ($sections as $id => $class){
 
        ?>
         <Option value="<?php echo $id; ?>"><?php echo $class;  ?></option>

@@ -1,6 +1,7 @@
 <?php
 require_once('header.php');
 require_once('db.php');
+require_once('helper.php');
  ?>
  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -42,8 +43,12 @@ try{
 
   $search = '';
 
-  $per_page = 5;
+  $per_page = 8;
   $curr_page = 1;
+
+  $classes = get_class1($conn);
+
+  //print_r($classes);
 
    if(isset($_GET['search']) && $_GET['search'] != ''){
      $search = $_GET['search'];
@@ -107,12 +112,13 @@ while($row = $stmt->fetch()){
     <td><?php echo $row['s_id']; ?></td>
     <td><?php echo $row['name']; ?></td>
     <td><?php echo $row['fname']; ?></td>
-    <td><?php echo $row['class_name']; ?></td>
+    <td><?php echo $classes[$row['class_name']]; ?></td>
     <td><?php echo $row['dob']; ?></td>
     <td><?php echo $row['address']; ?></td>
     <td><?php echo $row['phone']; ?></td>
     <td><a href="stu-edit.php?edit=<?php echo $row['s_id']; ?>">Edit</a></td>
     <td><a href="stu-delete.php?id=<?php echo $row['s_id']; ?>">Delete</a></td>
+  
 
   </tr>
 
