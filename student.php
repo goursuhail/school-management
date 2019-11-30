@@ -46,7 +46,7 @@
 </div>
   <div class="col-sm-3">
     <label for="exampleInputPassword1"><strong>Student Dob</strong></label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name="sdob" placeholder="Enter Student Dob">
+    <input type="text" class="form-control" id="exampleInputPassword1" name="sdob" placeholder="yy-mm-dd">
   </div>
   <div class="col-sm-3">
     <label for="exampleInputPassword1"><strong>Father Name</strong></label>

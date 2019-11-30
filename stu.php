@@ -16,7 +16,7 @@ try{
   $stmt->execute();
 
 
-  //header('location: stu-display.php');
+  header('location: stu-display.php');
   //print_r($_POST);
   //echo "New Record Added Succesfully";
 

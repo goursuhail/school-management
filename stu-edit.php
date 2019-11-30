@@ -63,7 +63,7 @@
 </div>
   <div class="col-sm-3">
     <label for="exampleInputPassword1"><strong>Student Dob</strong></label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name="sdob" value="<?php echo $row['dob']; ?>" placeholder="Enter Student Dob">
+    <input type="text" class="form-control" id="exampleInputPassword1" name="sdob" value="<?php echo $row['dob']; ?>" placeholder="yy-mm-dd">
   </div>
   <div class="col-sm-3">
     <label for="exampleInputPassword1"><strong>Father Name</strong></label>
@@ -94,7 +94,7 @@
     <input type="text" class="form-control" id="exampleInputPassword1" name="pho" value="<?php echo $row['phone']; ?>" placeholder="Enter Phone">
   </div>
   <input type="hidden" name="student_id" value="<?php echo $row['s_id']; ?>">
-  
+
   <button type="submit" id="sub" class="btn btn-primary">Submit</button>
 </form>
 </div>

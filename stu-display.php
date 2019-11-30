@@ -5,7 +5,7 @@ require_once('helper.php');
  ?>
  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-     <h1 class="h2">#Student List</h1>
+     <div id="top-bar"><h1 class="h2">#Student List</h1></div>
 
 
        <!-- search bar -->
@@ -61,6 +61,8 @@ try{
    $limit_start = ($curr_page - 1) * $per_page;
 
    $limit = ' limit '.$limit_start.', '.$per_page;
+
+
 
   $query = 'SELECT * FROM `student`';
 
@@ -118,7 +120,7 @@ while($row = $stmt->fetch()){
     <td><?php echo $row['phone']; ?></td>
     <td><a href="stu-edit.php?edit=<?php echo $row['s_id']; ?>">Edit</a></td>
     <td><a href="stu-delete.php?id=<?php echo $row['s_id']; ?>">Delete</a></td>
-  
+
 
   </tr>
 

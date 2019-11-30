@@ -4,7 +4,7 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">#Admin List</h1>
+        <div id="top-bar"><h1 class="h2">#Admin List</h1></div>
 
         <!-- search bar-->
         <div class="container">
@@ -55,6 +55,7 @@ try{
    $limit_start = ($curr_page - 1) * $per_page;
 
    $limit = ' limit '.$limit_start.', '.$per_page;
+
 
   $query = 'SELECT * FROM `admin_user`';
 
